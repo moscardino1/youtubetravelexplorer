@@ -1,0 +1,22 @@
+cd youtubetravelexplorer
+source venv/bin/activate
+python app.py
+
+to dev test
+    vercel dev
+to deploy
+    vercel deploy
+
+to prod:
+    vercel --prod 
+
+
+python3 -m venv venv
+source venv/bin/activate
+
+ 
+mkdir youtubetravelexplorer
+cd youtubetravelexplorer
+python app.py
+pip freeze > requirements.txt
+pip install -r requirements.txt
