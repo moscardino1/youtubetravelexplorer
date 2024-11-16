@@ -1,7 +1,7 @@
 // static/js/main.js
 console.log('Initializing map application');
 
-let map = L.map('map').setView([0, 0], 2);
+const map = L.map('map').setView([20, 0], 2);
 let selectedCountry = null;
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -16,6 +16,7 @@ let countryLayer;
 console.log('Fetching country boundaries');
 fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson')
     .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
         console.log('Received country boundaries response');
         return response.json();
     })
@@ -29,23 +30,31 @@ fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/coun
                 color: 'white',
                 fillOpacity: 0.3
             },
-            onEachFeature: function(feature, layer) {
-                layer.on('click', function() {
+            onEachFeature: (feature, layer) => {
+                layer.bindTooltip(feature.properties.ADMIN, {
+                    permanent: false,
+                    direction: 'top',
+                    opacity: 0.8
+                });
+
+                layer.on('click', () => {
                     console.log(`Country selected: ${feature.properties.ADMIN}`);
                     selectedCountry = feature.properties.ADMIN;
-                    searchVideos(feature.properties.ADMIN);
+                    searchVideos(selectedCountry);
                 });
                 
-                layer.on('mouseover', function() {
-                    layer.setStyle({
-                        fillOpacity: 0.7
-                    });
+                layer.on('mouseover', (e) => {
+                    layer.setStyle({ fillOpacity: 0.7 });
+                    layer.openTooltip();
+                    const tooltip = layer.getTooltip();
+                    if (tooltip) {
+                        tooltip.setLatLng(e.latlng);
+                    }
                 });
                 
-                layer.on('mouseout', function() {
-                    layer.setStyle({
-                        fillOpacity: 0.3
-                    });
+                layer.on('mouseout', () => {
+                    layer.setStyle({ fillOpacity: 0.3 });
+                    layer.closeTooltip();
                 });
             }
         }).addTo(map);
@@ -53,47 +62,44 @@ fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/coun
     })
     .catch(error => console.error('Error loading country boundaries:', error));
 
+let debounceTimeout;
+
+// Debounce function to prevent multiple rapid calls
+function debounce(func, delay) {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(func, delay);
+}
+
 function searchVideos(country) {
     const language = document.getElementById('language').value;
     const category = document.getElementById('category').value;
-    
-    console.log(`Searching videos for:`, {
-        country: country,
-        language: language,
-        category: category
-    });
-    
-    fetch('/search', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            country: country,
-            language: language,
-            category: category
+
+    console.log(`Searching videos for:`, { country, language, category });
+
+    // Call debounce with a function that performs the fetch
+    debounce(() => {
+        fetch('/search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ country, language, category }),
         })
-    })
-    .then(response => {
-        console.log('Received response from server');
-        return response.json();
-    })
-    .then(data => {
-        console.log('Received video data:', data);
-        if (data.error) {
-            console.error('Error from server:', data.error);
-            alert(`Error: ${data.error}`);
-        } else {
-            displayVideos(data.videos);
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching videos:', error);
-        alert('Error fetching videos. Please try again.');
-    });
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                console.error('Error from server:', data.error);
+                alert(`Error: ${data.error}`);
+            } else {
+                displayVideos(data.videos);
+            }
+        })
+        .catch(error => console.error('Error fetching videos:', error));
+    }, 500); // 500ms delay
 }
 
-function displayVideos(videos) {
+const displayVideos = (videos) => {
     console.log(`Displaying ${videos.length} videos`);
     const videosList = document.getElementById('videos-list');
     videosList.innerHTML = '';
@@ -101,12 +107,12 @@ function displayVideos(videos) {
     videos.forEach((video, index) => {
         console.log(`Processing video ${index + 1}:`, video.title);
         const videoElement = document.createElement('div');
-        videoElement.className = 'video-item';
+        videoElement.className = 'video-item border rounded-lg shadow-md p-4 cursor-pointer transition-transform transform hover:scale-105';
         videoElement.innerHTML = `
-            <img src="${video.thumbnail}" alt="${video.title}">
-            <h3>${video.title}</h3>
-            <p>${video.channelTitle}</p>
-            <small>Published: ${new Date(video.publishedAt).toLocaleDateString()}</small>
+            <img src="${video.thumbnail}" alt="${video.title}" class="w-full h-32 object-cover rounded-md mb-2">
+            <h3 class="font-semibold text-lg">${video.title}</h3>
+            <p class="text-gray-600">${video.channelTitle}</p>
+            <small class="text-gray-500">Published: ${new Date(video.publishedAt).toLocaleDateString()}</small>
         `;
         
         videoElement.addEventListener('click', () => {
@@ -116,7 +122,7 @@ function displayVideos(videos) {
         
         videosList.appendChild(videoElement);
     });
-}
+};
 
 // Update results when language or category changes
 document.getElementById('language').addEventListener('change', () => {

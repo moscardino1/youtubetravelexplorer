@@ -1,8 +1,11 @@
 /* static/css/style.css */
-body {
+html, body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+    height: 100%;
+}
+
+body {
     display: flex;
     flex-direction: column;
 }
@@ -14,14 +17,13 @@ body {
 }
 
 .controls {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    position: relative;
     z-index: 1000;
     background: white;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin: 20px;
 }
 
 .controls select {
@@ -63,3 +65,4 @@ body {
     font-size: 12px;
     color: #666;
 }
+

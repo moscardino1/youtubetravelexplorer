@@ -4,6 +4,9 @@ import logging
 from googleapiclient.discovery import build
 from dotenv import load_dotenv
 from datetime import datetime
+import qrcode
+import base64
+from io import BytesIO
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -97,6 +100,32 @@ def search_videos():
             'query': search_query,
             'timestamp': datetime.now().isoformat()
         }), 500
+
+@app.route('/donate')
+def donate():
+    USDT_ADDRESS = "0xDC92534Be92780c87f232CD525D99e26892E15f7"
+    
+    # Generate QR code
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(USDT_ADDRESS)
+    qr.make(fit=True)
+
+    # Create an image from the QR Code instance
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    # Save the image to a BytesIO object
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+
+    # Encode the image to Base64
+    qr_image = base64.b64encode(buffered.getvalue()).decode('utf-8')
+    
+    return render_template('donate.html', usdt_address=USDT_ADDRESS, qr_image=qr_image)
 
 # Add request logging middleware
 @app.before_request

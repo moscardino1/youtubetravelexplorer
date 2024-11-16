@@ -1,36 +1,55 @@
 <!-- templates/index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" x-data="{ selectedCountry: null }">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube Map Explorer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
 </head>
-<body>
-    <div class="controls">
-        <select id="language">
-            <option value="English">English</option>
-            <option value="Italiano">Italiano</option>
-            <option value="Español">Español</option>
-            <option value="Français">Français</option>
-            <option value="Deutsch">Deutsch</option>
-        </select>
-        <select id="category">
-            <option value="travel vlog">Travel Vlog</option>
-            <option value="walking tour">Walking Tour</option>
-            <option value="documentary">Documentary</option>
-        </select>
-    </div>
-    
-    <div id="map"></div>
-    
-    <div id="videos-overlay" class="videos-container">
-        <div id="videos-list"></div>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold text-center mb-4">YouTube Map Explorer</h1>
+        
+        <!-- Usage Instructions -->
+        <div class="mb-4 text-center text-gray-700">
+            <p class="mb-2">Welcome to the YouTube Map Explorer!</p>
+            <p class="mb-2">1. Hover over a country on the map to see its name.</p>
+            <p class="mb-2">2. Click on a country to search for related YouTube videos.</p>
+            <p class="mb-2">3. Use the dropdown menus to select your preferred language and video category.</p>
+            <p>Enjoy exploring!</p>
+        </div>
+
+        <div class="flex justify-center space-x-4 mb-4">
+            <select id="language" class="border rounded p-2" x-model="language">
+                <option value="English">English</option>
+                <option value="Italiano">Italiano</option>
+                <option value="Español">Español</option>
+                <option value="Français">Français</option>
+                <option value="Deutsch">Deutsch</option>
+            </select>
+            <select id="category" class="border rounded p-2" x-model="category">
+                <option value="travel vlog">Travel Vlog</option>
+                <option value="walking tour">Walking Tour</option>
+                <option value="documentary">Documentary</option>
+            </select>
+        </div>
+
+        <!-- Donate Button -->
+        <div class="text-center mb-4">
+            <a href="/donate" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Donate</a>
+        </div>
+        
+        <div id="map" class="h-96 mb-4"></div>
+        
+        <div id="videos-overlay" class="videos-container">
+            <div id="videos-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
