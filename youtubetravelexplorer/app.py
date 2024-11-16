@@ -67,7 +67,7 @@ def search_videos():
         )
         
         logger.info("Executing YouTube API request")
-        response = youtube_request.execute()
+        response = 's' #youtube_request.execute()
         logger.info(f"Received {len(response.get('items', []))} results from YouTube API")
         
         videos = []

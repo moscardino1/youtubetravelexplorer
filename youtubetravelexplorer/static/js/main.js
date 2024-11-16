@@ -3,7 +3,8 @@ console.log('Initializing map application');
 
 const map = L.map('map').setView([20, 0], 2);
 let selectedCountry = null;
-let selectedCity = null;
+let selectedCity = null; // Variable to hold the selected city
+let cityMarkers = []; // Array to hold city markers
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
@@ -12,31 +13,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 console.log('Map initialized');
 
 let countryLayer;
-
-// Predefined major cities with coordinates
-const majorCities = {
-    "United States": [
-        { name: "New York", coords: [40.7128, -74.0060] },
-        { name: "Los Angeles", coords: [34.0522, -118.2437] },
-        { name: "Chicago", coords: [41.8781, -87.6298] }
-    ],
-    "Canada": [
-        { name: "Toronto", coords: [43.6510, -79.3470] },
-        { name: "Vancouver", coords: [49.2827, -123.1207] },
-        { name: "Montreal", coords: [45.5017, -73.5673] }
-    ],
-    "France": [
-        { name: "Paris", coords: [48.8566, 2.3522] },
-        { name: "Lyon", coords: [45.7640, 4.8357] },
-        { name: "Marseille", coords: [43.2965, 5.3698] }
-    ],
-    "Germany": [
-        { name: "Berlin", coords: [52.5200, 13.4050] },
-        { name: "Munich", coords: [48.1351, 11.5820] },
-        { name: "Frankfurt", coords: [50.1109, 8.6821] }
-    ],
-    // Add more countries and cities as needed
-};
 
 // Load GeoJSON data for country boundaries
 console.log('Fetching country boundaries');
@@ -66,8 +42,7 @@ fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/coun
                 layer.on('click', () => {
                     console.log(`Country selected: ${feature.properties.ADMIN}`);
                     selectedCountry = feature.properties.ADMIN;
-                    selectedCity = null; // Reset selected city
-                    searchVideos(selectedCountry, null); // Trigger search with only the country
+                    fetchMajorCities(selectedCountry); // Fetch and display major cities
                 });
                 
                 layer.on('mouseover', (e) => {
@@ -86,28 +61,64 @@ fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/coun
             }
         }).addTo(map);
         console.log('Country layer added to map');
-
-        // Plot major cities on the map
-        plotMajorCities();
     })
     .catch(error => console.error('Error loading country boundaries:', error));
 
-// Function to plot major cities on the map
-function plotMajorCities() {
-    for (const country in majorCities) {
-        majorCities[country].forEach(city => {
-            const marker = L.marker(city.coords).addTo(map);
-            marker.bindPopup(city.name).on('click', () => {
-                console.log(`City selected: ${city.name}`);
-                selectedCity = city.name;
-                searchVideos(country, selectedCity);
+// Load major cities from the configuration file
+let citiesConfig = {};
+
+fetch('/static/cities_config.json')
+    .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+    })
+    .then(data => {
+        citiesConfig = data; // Store the cities configuration
+        console.log('Cities configuration loaded successfully');
+    })
+    .catch(error => console.error('Error loading cities configuration:', error));
+
+// Function to fetch major cities based on the selected country
+function fetchMajorCities(country) {
+    console.log(`Fetching major cities for: ${country}`); // Debug log
+    // Clear existing city markers
+    cityMarkers.forEach(marker => map.removeLayer(marker));
+    cityMarkers = [];
+
+    // Check if the country exists in the configuration
+    if (citiesConfig[country]) {
+        console.log(`Found cities for ${country}:`, citiesConfig[country]); // Debug log
+        setTimeout(() => {
+            citiesConfig[country].forEach(city => {
+                console.log(`Adding city: ${city.name} at ${city.coords}`); // Debug log
+                const marker = L.marker(city.coords).addTo(map);
+                marker.bindPopup(city.name);
+                marker.on('click', () => {
+                    console.log(`City selected: ${city.name}`);
+                    selectedCity = city.name; // Set the selected city
+                    searchVideos(country, selectedCity); // Trigger search for the selected city
+                });
+                cityMarkers.push(marker); // Store the marker for later removal
             });
-        });
+        }, 100); // Delay of 100ms
+    } else {
+        console.log(`No major cities found for ${country}, searching by country instead.`);
+        selectedCity = null; // Reset selected city if no cities found
+        searchVideos(country, selectedCity); // Trigger search by country
     }
 }
 
-
-
+// Remove city markers when clicking outside the country
+map.on('click', (e) => {
+    // Check if the click is outside the country layer
+    if (!countryLayer.getBounds().contains(e.latlng)) {
+        cityMarkers.forEach(marker => map.removeLayer(marker));
+        cityMarkers = [];
+    } else if (selectedCountry) {
+        // If a country is selected, trigger search for the country
+        searchVideos(selectedCountry, selectedCity); // Trigger search with the selected city
+    }
+});
 
 let debounceTimeout;
 
@@ -118,7 +129,7 @@ function debounce(func, delay) {
 }
 
 function generateCacheKey(country, city, language, category) {
-    return `${country}-${city}-${language}-${category}`; // Unique key based on search parameters
+    return `${country}-${city || 'no-city'}-${language}-${category}`; // Unique key based on search parameters
 }
 
 function searchVideos(country, city) {
@@ -127,7 +138,7 @@ function searchVideos(country, city) {
 
     console.log(`Searching videos for:`, { country, language, category, city });
 
-    // Construct the search query to include the city
+    // Construct the search query to include the city if it exists
     const searchQuery = city ? `${city}, ${country} ${language} ${category}` : `${country} ${language} ${category}`;
     const cacheKey = generateCacheKey(country, city, language, category);
 

@@ -1,0 +1,882 @@
+{
+    "Afghanistan": [
+        { "name": "Kabul", "coords": [34.5143, 69.1832] },
+        { "name": "Kandahar", "coords": [31.6381, 65.6707] },
+        { "name": "Herat", "coords": [34.3423, 62.1623] }
+    ],
+    "Albania": [
+        { "name": "Tirana", "coords": [41.3271, 19.8181] },
+        { "name": "Durrës", "coords": [41.3167, 19.5333] },
+        { "name": "Vlorë", "coords": [39.4979, 19.9233] }
+    ],
+    "Algeria": [
+        { "name": "Algiers", "coords": [36.7556, 3.0613] },
+        { "name": "Oran", "coords": [35.7253, 0.6117] },
+        { "name": "Constantine", "coords": [36.3697, 6.6253] }
+    ],
+    "Andorra": [
+        { "name": "Andorra la Vella", "coords": [42.5064, 1.5223] }
+    ],
+    "Angola": [
+        { "name": "Luanda", "coords": [-8.8083, 13.2219] },
+        { "name": "Huambo", "coords": [-12.8689, 15.7167] },
+        { "name": "Kuito", "coords": [-11.3667, 17.0833] }
+    ],
+    "Antigua and Barbuda": [
+        { "name": "St. John's", "coords": [17.0969, -61.8389] }
+    ],
+    "Argentina": [
+        { "name": "Buenos Aires", "coords": [-34.6037, -58.3816] },
+        { "name": "Cordoba", "coords": [-31.4333, -64.3333] },
+        { "name": "Mendoza", "coords": [-32.8667, -68.7833] }
+    ],
+    "Armenia": [
+        { "name": "Yerevan", "coords": [40.1833, 44.5167] },
+        { "name": "Gyumri", "coords": [40.7469, 43.8483] },
+        { "name": "Vanadzor", "coords": [40.7747, 44.4767] }
+    ],
+    "Australia": [
+        { "name": "Sydney", "coords": [-33.8651, 151.2093] },
+        { "name": "Melbourne", "coords": [-37.8167, 144.9667] },
+        { "name": "Brisbane", "coords": [-27.4698, 153.0214] }
+    ],
+    "Austria": [
+        { "name": "Vienna", "coords": [48.2083, 16.3833] },
+        { "name": "Salzburg", "coords": [47.7947, 13.0442] },
+        { "name": "Graz", "coords": [47.0667, 15.4333] }
+    ],
+    "Azerbaijan": [
+        { "name": "Baku", "coords": [40.3854, 49.8794] },
+        { "name": "Ganja", "coords": [40.4033, 46.3733] },
+        { "name": "Sumqayit", "coords": [40.5469, 49.7003] }
+    ],
+    "Bahamas": [
+        { "name": "Nassau", "coords": [25.0681, -77.3333] }
+    ],
+    "Bahrain": [
+        { "name": "Manama", "coords": [25.9667, 50.5833] }
+    ],
+    "Bangladesh": [
+        { "name": "Dhaka", "coords": [23.7833, 90.3833] },
+        { "name": "Chittagong", "coords": [22.3342, 91.8233] },
+        { "name": "Khulna", "coords": [23.0139, 89.5633] }
+    ],
+    "Barbados": [
+        { "name": "Bridgetown", "coords": [13.1063, -59.6194] }
+    ],
+    "Belarus": [
+        { "name": "Minsk", "coords": [53.9023, 27.5678] },
+        { "name": "Mogilev", "coords": [53.5667, 30.3333] },
+        { "name": "Vitebsk", "coords": [55.1667, 30.2333] }
+    ],
+    "Belgium": [
+        { "name": "Brussels", "coords": [50.8503, 4.3517] },
+        { "name": "Antwerp", "coords": [51.2183, 4.4003] },
+        { "name": "Ghent", "coords": [51.0503, 3.7167] }
+    ],
+    "Belize": [
+        { "name": "Belmopan", "coords": [17.2667, -88.7833] },
+        { "name": "Belize City", "coords": [17.5013, -88.1667] }
+    ],
+    "Benin": [
+        { "name": "Porto-Novo", "coords": [6.4667, 2.6167] },
+        { "name": "Cotonou", "coords": [6.3833, 2.3333] },
+        { "name": "Parakou", "coords": [9.3833, 2.6167] }
+    ],
+    "Bhutan": [
+        { "name": "Thimphu", "coords": [27.4667, 89.6333] }
+    ],
+    "Bolivia": [
+        { "name": "Sucre", "coords": [-18.0167, -65.2667] },
+        { "name": "La Paz", "coords": [-16.4667, -68.1167] },
+        { "name": "Santa Cruz", "coords": [-17.7667, -63.0833] }
+    ],
+    "Bosnia and Herzegovina": [
+        { "name": "Sarajevo", "coords": [43.8667, 18.4167] },
+        { "name": "Banja Luka", "coords": [44.7667, 17.1833] },
+        { "name": "Tuzla", "coords": [44.3333, 18.6333] }
+    ],
+    "Botswana": [
+        { "name": "Gaborone", "coords": [-24.6467, 25.9167] }
+    ],
+    "Brazil": [
+        { "name": "Brasília", "coords": [-15.7833, -47.8667] },
+        { "name": "São Paulo", "coords": [-23.5333, -46.6333] },
+        { "name": "Rio de Janeiro", "coords": [-22.9064, -43.1729] }
+    ],
+    "Brunei": [
+        { "name": "Bandar Seri Begawan", "coords": [4.9333, 114.9333] }
+    ],
+    "Bulgaria": [
+        { "name": "Sofia", "coords": [42.7000, 23.3333] },
+        { "name": "Plovdiv", "coords": [42.1500, 24.2833] },
+        { "name": "Varna", "coords": [43.2000, 27.8833] }
+    ],
+    "Burkina Faso": [
+        { "name": "Ouagadougou", "coords": [12.3667, -1.6333] }
+    ],
+    "Burma": [
+        { "name": "Naypyidaw", "coords": [19.7639, 96.1300] },
+        { "name": "Mandalay", "coords": [21.9833, 96.0833] },
+        { "name": "Yangon", "coords": [16.7889, 96.1300] }
+    ],
+    "Burundi": [
+        { "name": "Bujumbura", "coords": [-3.3667, 29.3833] },
+        { "name": "Gitega", "coords": [-3.3667, 30.2833] },
+        { "name": "Muyinga", "coords": [-2.8667, 30.4667] }
+    ],
+    "Cambodia": [
+        { "name": "Phnom Penh", "coords": [11.5556, 104.9167] },
+        { "name": "Siem Reap", "coords": [13.3697, 103.8667] },
+        { "name": "Sihanoukville", "coords": [10.6233, 103.5833] }
+    ],
+    "Cameroon": [
+        { "name": "Yaoundé", "coords": [3.8667, 11.5167] },
+        { "name": "Douala", "coords": [4.0667, 9.7333] },
+        { "name": "Bamenda", "coords": [5.9333, 10.0667] }
+    ],
+    "Canada": [
+        { "name": "Toronto", "coords": [43.6510, -79.3470] },
+        { "name": "Vancouver", "coords": [49.2827, -123.1207] },
+        { "name": "Montreal", "coords": [45.5017, -73.5673] }
+    ],
+    "Cape Verde": [
+        { "name": "Praia", "coords": [14.9167, -23.3833] }
+    ],
+    "Central African Republic": [
+        { "name": "Bangui", "coords": [4.3667, 18.5667] }
+    ],
+    "Chad": [
+        { "name": "N'Djamena", "coords": [12.0667, 16.0667] }
+    ],
+    "Chile": [
+        { "name": "Santiago", "coords": [-33.4500, -70.6833] },
+        { "name": "Antofagasta", "coords": [-23.6833, -70.3667] },
+        { "name": "Valparaíso", "coords": [-33.0667, -71.6333] }
+    ],
+    "China": [
+        { "name": "Beijing", "coords": [39.9042, 116.4074] },
+        { "name": "Shanghai", "coords": [31.2342, 121.4737] },
+        { "name": "Guangzhou", "coords": [23.1333, 113.2667] }
+    ],
+    "Colombia": [
+        { "name": "Bogotá", "coords": [4.6064, -74.0789] },
+        { "name": "Medellín", "coords": [6.2583, -75.5678] },
+        { "name": "Cali", "coords": [3.4433, -76.5333] }
+    ],
+    "Comoros": [
+        { "name": "Moroni", "coords": [-11.7333, 43.2333] }
+    ],
+    "Congo (Brazzaville)": [
+        { "name": "Brazzaville", "coords": [-4.2667, 15.2833] },
+        { "name": "Pointe-Noire", "coords": [-4.7667, 11.8333] },
+        { "name": "Owando", "coords": [-2.3667, 18.5667] }
+    ],
+    "Congo (Kinshasa)": [
+        { "name": "Kinshasa", "coords": [-4.3333, 15.2667] },
+        { "name": "Lubumbashi", "coords": [-11.6667, 27.4667] },
+        { "name": "Mbandaka", "coords": [0.2167, 18.2833] }
+    ],
+    "Cook Islands": [
+        { "name": "Avarua", "coords": [-21.2333, -159.7833] }
+    ],
+    "Costa Rica": [
+        { "name": "San José", "coords": [9.9333, -84.0833] },
+        { "name": "San Isidro", "coords": [9.5167, -84.6667] },
+        { "name": "Alajuela", "coords": [10.0667, -84.4167] }
+    ],
+    "Côte d'Ivoire": [
+        { "name": "Yamoussoukro", "coords": [6.9333, -5.2833] },
+        { "name": "Abidjan", "coords": [5.2833, -4.0333] },
+        { "name": "Bouaké", "coords": [7.7833, -5.0167] }
+    ],
+    "Croatia": [
+        { "name": "Zagreb", "coords": [45.8167, 15.9667] },
+        { "name": "Split", "coords": [43.5333, 16.4333] },
+        { "name": "Rijeka", "coords": [45.3167, 14.4167] }
+    ],
+    "Cuba": [
+        { "name": "Havana", "coords": [23.1333, -82.3833] },
+        { "name": "Santiago de Cuba", "coords": [20.0333, -75.8333] },
+        { "name": "Camagüey", "coords": [21.4667, -77.9167] }
+    ],
+    "Cyprus": [
+        { "name": "Nicosia", "coords": [35.1667, 33.3833] },
+        { "name": "Limassol", "coords": [34.6667, 33.0167] },
+        { "name": "Larnaca", "coords": [34.9167, 33.6333] }
+    ],
+    "Czech Republic": [
+        { "name": "Prague", "coords": [50.0667, 14.4167] },
+        { "name": "Brno", "coords": [49.2167, 16.6167] },
+        { "name": "Ostrava", "coords": [49.8000, 18.3000] }
+    ],
+    "Denmark": [
+        { "name": "Copenhagen", "coords": [55.6763, 12.5683] },
+        { "name": "Aarhus", "coords": [56.1544, 10.2036] },
+        { "name": "Odense", "coords": [55.4042, 10.3949] }
+    ],
+    "Djibouti": [
+        { "name": "Djibouti City", "coords": [11.55, 43.15] }
+    ],
+    "Dominica": [
+        { "name": "Roseau", "coords": [15.2833, -61.3833] }
+    ],
+    "Dominican Republic": [
+        { "name": "Santo Domingo", "coords": [18.4667, -69.6167] },
+        { "name": "Santiago de los Caballeros", "coords": [19.4333, -70.6667] },
+        { "name": "San Francisco de Macorís", "coords": [19.2833, -70.3833] }
+    ],
+    "Ecuador": [
+        { "name": "Quito", "coords": [-0.1833, -78.5333] },
+        { "name": "Guayaquil", "coords": [-2.9667, -79.8833] },
+        { "name": "Cuenca", "coords": [-2.9333, -79.0167] }
+    ],
+    "Egypt": [
+        { "name": "Cairo", "coords": [30.0667, 31.2333] },
+        { "name": "Alexandria", "coords": [31.2167, 29.8667] },
+        { "name": "Giza", "coords": [30.0667, 31.2333] }
+    ],
+    "El Salvador": [
+        { "name": "San Salvador", "coords": [13.7333, -89.2167] },
+        { "name": "Santa Ana", "coords": [14.2833, -89.5833] },
+        { "name": "San Miguel", "coords": [13.5333, -88.2167] }
+    ],
+    "Equatorial Guinea": [
+        { "name": "Malabo", "coords": [3.75, 8.75] }
+    ],
+    "Eritrea": [
+        { "name": "Asmara", "coords": [15.3333, 38.9167] },
+        { "name": "Massawa", "coords": [15.4167, 39.2833] },
+        { "name": "Keren", "coords": [15.4833, 38.2833] }
+    ],
+    "Estonia": [
+        { "name": "Tallinn", "coords": [59.4333, 24.6667] },
+        { "name": "Tartu", "coords": [58.3667, 26.4667] },
+        { "name": "Pärnu", "coords": [58.3833, 24.4667] }
+    ],
+    "Ethiopia": [
+        { "name": "Addis Ababa", "coords": [9.0333, 38.75] },
+        { "name": "Dire Dawa", "coords": [9.2333, 41.9833] },
+        { "name": "Mekele", "coords": [13.4667, 39.4833] }
+    ],
+    "Fiji": [
+        { "name": "Suva", "coords": [-18.1333, 178.4833] }
+    ],
+    "Finland": [
+        { "name": "Helsinki", "coords": [60.1667, 24.9667] },
+        { "name": "Espoo", "coords": [60.1833, 24.6167] },
+        { "name": "Turku", "coords": [60.4333, 22.2833] }
+    ],
+    "France": [
+        { "name": "Paris", "coords": [48.8567, 2.2945] },
+        { "name": "Marseille", "coords": [43.2963, 5.3697] },
+        { "name": "Lyon", "coords": [45.7589, 4.8497] }
+    ],
+    "French Guiana": [
+        { "name": "Cayenne", "coords": [4.9333, -52.3667] }
+    ],
+    "French Polynesia": [
+        { "name": "Papeete", "coords": [-17.5333, -149.5667] }
+    ],
+    "Gabon": [
+        { "name": "Libreville", "coords": [0.3667, 9.4667] }
+    ],
+    "Gambia": [
+        { "name": "Banjul", "coords": [13.4333, -16.5333] }
+    ],
+    "Georgia": [
+        { "name": "Tbilisi", "coords": [41.6833, 44.7833] },
+        { "name": "Batumi", "coords": [41.6333, 41.6333] },
+        { "name": "Kutaisi", "coords": [42.2833, 42.7833] }
+    ],
+    "Germany": [
+        { "name": "Berlin", "coords": [52.5200, 13.4050] },
+        { "name": "Hamburg", "coords": [53.5500, 9.9931] },
+        { "name": "Munich", "coords": [48.1379, 11.5760] }
+    ],
+    "Ghana": [
+        { "name": "Accra", "coords": [5.5500, -0.2333] },
+        { "name": "Kumasi", "coords": [6.7000, -1.5333] },
+        { "name": "Tamale", "coords": [9.1333, -1.0333] }
+    ],
+    "Greece": [
+        { "name": "Athens", "coords": [37.9833, 23.7333] },
+        { "name": "Thessaloniki", "coords": [40.6333, 22.9667] },
+        { "name": "Patras", "coords": [38.3000, 21.7333] }
+    ],
+    "Grenada": [
+        { "name": "St. George's", "coords": [12.0667, -61.7333] }
+    ],
+    "Guatemala": [
+        { "name": "Guatemala City", "coords": [14.6333, -90.5167] },
+        { "name": "Quetzaltenango", "coords": [14.8833, -91.4833] },
+        { "name": "Antigua", "coords": [14.5833, -90.9833] }
+    ],
+    "Guinea": [
+        { "name": "Conakry", "coords": [9.5000, -13.7167] },
+        { "name": "Kindia", "coords": [9.2833, -12.9833] },
+        { "name": "Boke", "coords": [10.1167, -14.0167] }
+    ],
+    "Guinea-Bissau": [
+        { "name": "Bissau", "coords": [11.8333, -15.6333] }
+    ],
+    "Guyana": [
+        { "name": "Georgetown", "coords": [6.8000, -58.1667] }
+    ],
+    "Haiti": [
+        { "name": "Port-au-Prince", "coords": [18.5333, -72.3333] },
+        { "name": "Cap-Haïten", "coords": [19.7667, -72.9667] },
+        { "name": "Gonaïves", "coords": [19.0667, -72.6167] }
+    ],
+    "Honduras": [
+        { "name": "Tegucigalpa", "coords": [14.0833, -87.1333] },
+        { "name": "San Pedro Sula", "coords": [15.5333, -88.0167] },
+        { "name": "La Ceiba", "coords": [15.7333, -86.7833] }
+    ],
+    "Hungary": [
+        { "name": "Budapest", "coords": [47.4981, 19.0402] },
+        { "name": "Debrecen", "coords": [47.5333, 21.6333] },
+        { "name": "Szeged", "coords": [46.2500, 20.1333] }
+    ],
+    "Iceland": [
+        { "name": "Reykjavik", "coords": [64.1333, -21.8333] }
+    ],
+    "India": [
+        { "name": "New Delhi", "coords": [28.6667, 77.2167] },
+        { "name": "Mumbai", "coords": [19.0833, 72.9167] },
+        { "name": "Kolkata", "coords": [22.5667, 88.3667] }
+    ],
+    "Indonesia": [
+        { "name": "Jakarta", "coords": [-6.1667, 106.8333] },
+        { "name": "Surabaya", "coords": [-7.2833, 112.6333] },
+        { "name": "Bandung", "coords": [-6.9333, 107.6333] }
+    ],
+    "Iran": [
+        { "name": "Tehran", "coords": [35.6833, 51.4167] },
+        { "name": "Mashhad", "coords": [36.2833, 59.5833] },
+        { "name": "Isfahan", "coords": [32.6333, 51.6833] }
+    ],
+    "Iraq": [
+        { "name": "Baghdad", "coords": [33.3333, 44.4167] },
+        { "name": "Basra", "coords": [30.2667, 47.7833] },
+        { "name": "Mosul", "coords": [36.2833, 43.0667] }
+    ],
+    "Ireland": [
+        { "name": "Dublin", "coords": [53.3333, -6.2500] },
+        { "name": "Cork", "coords": [51.8833, -8.4667] },
+        { "name": "Limerick", "coords": [52.6667, -8.6333] }
+    ],
+    "Israel": [
+        { "name": "Tel Aviv", "coords": [32.0667, 34.7667] },
+        { "name": "Jerusalem", "coords": [31.7833, 35.2167] },
+        { "name": "Haifa", "coords": [32.7667, 34.9667] }
+    ],
+    "Italy": [
+        { "name": "Rome", "coords": [41.8667, 12.5] },
+        { "name": "Milan", "coords": [45.4667, 9.1667] },
+        { "name": "Naples", "coords": [40.7667, 14.2667] }
+    ],
+    "Jamaica": [
+        { "name": "Kingston", "coords": [17.9667, -76.7833] }
+    ],
+    "Japan": [
+        { "name": "Tokyo", "coords": [35.6895, 139.7670] },
+        { "name": "Osaka", "coords": [34.6934, 135.5000] },
+        { "name": "Nagoya", "coords": [35.1705, 136.9045] }
+    ],
+    "Jordan": [
+        { "name": "Amman", "coords": [31.95, 35.92] }
+    ],
+    "Kazakhstan": [
+        { "name": "Nur-Sultan", "coords": [51.1667, 71.4167] },
+        { "name": "Almaty", "coords": [43.9667, 76.5333] },
+        { "name": "Karaganda", "coords": [49.9667, 73.0667] }
+    ],
+    "Kenya": [
+        { "name": "Nairobi", "coords": [-1.2833, 36.7833] },
+        { "name": "Mombasa", "coords": [4.0667, 39.7833] },
+        { "name": "Kisumu", "coords": [0.0667, 34.7833] }
+    ],
+    "Kiribati": [
+        { "name": "Tarawa", "coords": [1.3833, 172.9667] }
+    ],
+    "North Korea": [
+        { "name": "Pyongyang", "coords": [39.0333, 125.7667] },
+        { "name": "Hamhung", "coords": [39.2833, 127.4667] },
+        { "name": "Hyesan", "coords": [39.9167, 128.2833] }
+    ],
+    "South Korea": [
+        { "name": "Seoul", "coords": [37.5665, 126.9779] },
+        { "name": "Busan", "coords": [35.1833, 129.0667] },
+        { "name": "Daegu", "coords": [35.9167, 128.5667] }
+    ],
+    "Kuwait": [
+        { "name": "Kuwait City", "coords": [29.3667, 47.9667] }
+    ],
+    "Kyrgyzstan": [
+        { "name": "Bishkek", "coords": [42.8833, 74.5833] },
+        { "name": "Osh", "coords": [40.5333, 72.8833] },
+        { "name": "Jalal-Abad", "coords": [41.0667, 73.3333] }
+    ],
+    "Laos": [
+        { "name": "Vientiane", "coords": [17.9667, 102.6167] },
+        { "name": "Luang Prabang", "coords": [19.8833, 102.1333] },
+        { "name": "Savannakhet", "coords": [16.4500, 102.6333] }
+    ],
+    "Latvia": [
+        { "name": "Riga", "coords": [56.9461, 24.1042] },
+        { "name": "Daugavpils", "coords": [55.8833, 26.5167] },
+        { "name": "Liepaja", "coords": [56.5167, 21.0667] }
+    ],
+    "Lebanon": [
+        { "name": "Beirut", "coords": [33.8833, 35.5167] },
+        { "name": "Tripoli", "coords": [34.4667, 35.7833] },
+        { "name": "Sidon", "coords": [33.5333, 35.3167] }
+    ],
+    "Lesotho": [
+        { "name": "Maseru", "coords": [-29.2833, 27.5167] }
+    ],
+    "Liberia": [
+        { "name": "Monrovia", "coords": [6.3333, -10.7667] },
+        { "name": "Gbarnga", "coords": [6.9667, -9.3333] },
+        { "name": "Buchanan", "coords": [6.2667, -9.6167] }
+    ],
+    "Libya": [
+        { "name": "Tripoli", "coords": [32.8833, 13.1833] },
+        { "name": "Benghazi", "coords": [32.1167, 20.0667] },
+        { "name": "Misrata", "coords": [32.3667, 15.0667] }
+    ],
+   
+        "Liechtenstein": [
+          { "name": "Vaduz", "coords": [47.1415, 9.5215] },
+          { "name": "Schaan", "coords": [47.1660, 9.5134] },
+          { "name": "Balzers", "coords": [47.0106, 9.5502] }
+        ],
+        "Lithuania": [
+          { "name": "Vilnius", "coords": [54.6872, 25.2797] },
+          { "name": "Kaunas", "coords": [54.8980, 23.9036] },
+          { "name": "Klaipėda", "coords": [55.7033, 21.1442] }
+        ],
+        "Luxembourg": [
+          { "name": "Luxembourg City", "coords": [49.6118, 6.1319] },
+          { "name": "Esch-sur-Alzette", "coords": [49.4941, 5.9831] },
+          { "name": "Differdange", "coords": [49.4947, 5.8964] }
+        ],
+        "Madagascar": [
+          { "name": "Antananarivo", "coords": [-18.8792, 47.5079] },
+          { "name": "Toamasina", "coords": [-18.1489, 49.4023] },
+          { "name": "Antsiranana", "coords": [-12.2769, 49.2923] }
+        ],
+        "Malawi": [
+          { "name": "Lilongwe", "coords": [-13.9626, 33.7872] },
+          { "name": "Blantyre", "coords": [-15.7850, 35.0059] },
+          { "name": "Mzuzu", "coords": [-11.4500, 34.0136] }
+        ],
+        "Malaysia": [
+          { "name": "Kuala Lumpur", "coords": [3.139,101.6869] },
+          { "name": "George Town", "coords": [5.4141, 100.3288] },
+          { "name": "Johor Bahru", "coords": [1.4927, 103.7417] }
+        ],
+        "Malta": [
+          { "name": "Valletta", "coords": [35.8989, 14.5149] },
+          { "name": "Birkirkara", "coords": [35.8958, 14.5086] },
+          { "name": "Sliema", "coords": [35.9114, 14.5127] }
+        ],
+        "Marshall Islands": [
+          { "name": "Majuro", "coords": [7.1014, 171.3806] },
+          { "name": "Ebeye", "coords": [8.7250, 167.7300] },
+          { "name": "Kwajalein", "coords": [8.7222, 167.7367] }
+        ],
+        "Mauritania": [
+          { "name": "Nouakchott", "coords": [18.0735, -15.9485] },
+          { "name": "Nouadhibou", "coords": [20.9312, -17.0344] },
+          { "name": "Kaedi", "coords": [16.0342, -14.7894] }
+        ],
+        "Mauritius": [
+          { "name": "Port Louis", "coords": [-20.1667, 57.5000] },
+          { "name": "Curepipe", "coords": [-20.3167, 57.5000] },
+          { "name": "Vacoas-Phoenix", "coords": [-20.3464, 57.4878] }
+        ],
+        "Mexico": [
+          { "name": "Mexico City", "coords": [19.4326, -99.1332] },
+          { "name": "Guadalajara", "coords": [20.6767, -103.3515] },
+          { "name": "Monterrey", "coords": [25.6866, -100.3161] }
+        ],
+        "Micronesia": [
+          { "name": "Palikir", "coords": [6.9116, 158.1490] },
+          { "name": "Weno", "coords": [2.0044, 151.8273] },
+          { "name": "Kolonia", "coords": [6.9350, 158.0500] }
+        ],
+        "Moldova": [
+          { "name": "Chișinău", "coords": [47.0105, 28.8394] },
+          { "name": "Bălți", "coords": [47.7655, 27.9354] },
+          { "name": "Bender", "coords": [46.8436, 29.4596] }
+        ],
+        "Monaco": [
+          { "name": "Monaco", "coords": [43.7384, 7.4246] },
+          { "name": "Monte Carlo", "coords": [43.7384, 7.4246] },
+          { "name": "La Condamine", "coords": [43.7370, 7.4262] }
+        ],
+        "Mongolia": [
+          { "name": "Ulaanbaatar", "coords": [47.8864, 106.9057] },
+          { "name": "Erdenet", "coords": [49.0300, 104.0269] },
+          { "name": "Darkhan", "coords": [49.4875, 105.9665] }
+        ],
+        "Montenegro": [
+          { "name": "Podgorica", "coords": [42.4411, 19.2636] },
+          { "name": "Nikšić", "coords": [42.7805, 18.9732] },
+          { "name": "Herceg Novi", "coords": [42.4600, 18.5314] }
+        ],
+        "Morocco": [
+          { "name": "Rabat", "coords": [34.0209, -6.8417] },
+          { "name": "Casablanca", "coords": [33.5731, -7.5898] },
+          { "name": "Marrakech", "coords": [31.6295, -7.9811] }
+        ],
+        "Mozambique": [
+          { "name": "Maputo", "coords": [-25.9692, 32.5732] },
+          { "name": "Beira", "coords": [-19.8431, 34.8382] },
+          { "name": "Nampula", "coords": [-15.1163, 39.2653] }
+        ],
+        "Myanmar": [
+          { "name": "Naypyidaw", "coords": [19.7454, 96.1313] },
+          { "name": "Yangon", "coords": [16.8409, 96.1735] },
+          { "name": "Mandalay", "coords": [21.9744, 96.0831] }
+        ],
+        "Namibia": [
+          { "name": "Windhoek", "coords": [-22.5597, 17.0833] },
+          { "name": "Swakopmund", "coords": [-22.6572, 14.5328] },
+          { "name": "Walvis Bay", "coords": [-22.9560, 14.5050] }
+        ],
+        "Nauru": [
+          { "name": "Yaren", "coords": [-0.5250, 166.9315] },
+          { "name": "Nauru", "coords": [-0.5220, 166.9315] },
+          { "name": "Denigomodu", "coords": [-0.5250, 166.9253] }
+        ],
+        "Nepal": [
+          { "name": "Kathmandu", "coords": [27.7172, 85.324] },
+          { "name": "Pokhara", "coords": [28.2096, 83.9856] },
+          { "name": "Lalitpur", "coords": [27.6715, 85.324] }
+        ],
+        "Netherlands": [
+          { "name": "Amsterdam", "coords": [52.3676, 4.9041] },
+          { "name": "Rotterdam", "coords": [51.9225, 4.4792] },
+          { "name": "The Hague", "coords": [52.0705, 4.3007] }
+        ],
+        "New Zealand": [
+          { "name": "Wellington", "coords": [-41.2865, 174.7762] },
+          { "name": "Auckland", "coords": [-36.8485, 174.7633] },
+          { "name": "Christchurch", "coords": [-43.5321, 172.6362] }
+        ],
+        "Nicaragua": [
+          { "name": "Managua", "coords": [12.1364, -86.2514] },
+          { "name": "León", "coords": [12.4370, -86.8785] },
+          { "name": "Granada", "coords": [11.9333, -85.9667] }
+        ],
+        "Niger": [
+          { "name": "Niamey", "coords": [13.5128, 2.1128] },
+          { "name": "Zinder", "coords": [13.7781, 8.9925] },
+          { "name": "Maradi", "coords": [13.2002, 7.0961] }
+        ],
+        "Nigeria": [
+          { "name": "Abuja", "coords": [9.0579, 7.4951] },
+          { "name": "Lagos", "coords": [6.5244, 3.3792] },
+          { "name": "Ibadan", "coords": [7.4094, 3.8985] }
+        ],
+        "North Macedonia": [
+          { "name": "Skopje", "coords": [41.9973, 21.4280] },
+          { "name": "Bitola", "coords": [41.0318, 21.3290] },
+          { "name": "Kumanovo", "coords": [42.1314, 21.7111] }
+        ],
+        "Norway": [
+          { "name": "Oslo", "coords": [59.9139, 10.7522] },
+          { "name": "Bergen", "coords": [60.3929, 5.3242] },
+          { "name": "Stavanger", "coords": [58.9690, 5.7331] }
+        ],
+        "Oman": [
+          { "name": "Muscat", "coords": [23.5859, 58.4059] },
+          { "name": "Salalah", "coords": [17.0139, 54.0915] },
+          { "name": "Sohar", "coords": [24.3480, 56.6346] }
+        ],
+        "Pakistan": [
+          { "name": "Islamabad", "coords": [33.6844, 73.0479] },
+          { "name": "Karachi", "coords": [24.8607, 67.0011] },
+          { "name": "Lahore", "coords": [31.5497, 74.3436] }
+        ],
+        "Palau": [
+          { "name": "Ngerulmud", "coords": [7.5000, 134.6229] },
+          { "name": "Koror", "coords": [7.3480, 134.4581] },
+          { "name": "Melekeok", "coords": [7.4855, 134.6220] }
+        ],
+        "Palestine": [
+          { "name": "Ramallah", "coords": [31.9028, 35.2024] },
+          { "name": "Gaza", "coords": [31.5, 34.47] },
+          { "name": "Hebron", "coords": [31.5285, 35.0959] }
+        ],
+        "Panama": [
+          { "name": "Panama City", "coords": [8.9833, -79.5167] },
+          { "name": "Colón", "coords": [9.3591, -79.9018] },
+          { "name": "David", "coords": [8.4283, -82.4313] }
+        ],
+        "Papua New Guinea": [
+          { "name": "Port Moresby", "coords": [-9.4430, 147.1800] },
+          { "name": "Lae", "coords": [-6.7266, 146.9919] },
+          { "name": "Mount Hagen", "coords": [-5.8692, 144.2180] }
+        ],
+        "Paraguay": [
+          { "name": "Asunción", "coords": [-25.2637, -57.5759] },
+          { "name": "Ciudad del Este", "coords": [-25.5083, -54.6100] },
+          { "name": "Luque", "coords": [-25.2993, -57.6552] }
+        ],
+        "Peru": [
+          { "name": "Lima", "coords": [-12.0464, -77.0428] },
+          { "name": "Arequipa", "coords": [-16.4090, -71.5374] },
+          { "name": "Trujillo", "coords": [-8.1110, -79.0298] }
+        ],
+        "Philippines": [
+          { "name": "Manila", "coords": [14.5995, 120.9842] },
+          { "name": "Quezon City", "coords": [14.6760, 121.0437] },
+          { "name": "Cebu City", "coords": [10.3157, 123.8854] }
+        ],
+        "Poland": [
+          { "name": "Warsaw", "coords": [52.2297, 21.0122] },
+          { "name": "Kraków", "coords": [50.0647, 19.9450] },
+          { "name": "Łódź", "coords": [51.7592, 19.4560] }
+        ],
+        "Portugal": [
+          { "name": "Lisbon", "coords": [38.7223, -9.1393] },
+          { "name": "Porto", "coords": [41.1496, -8.6109] },
+          { "name": "Amadora", "coords": [38.7684, -9.2232] }
+        ],
+        "Qatar": [
+          { "name": "Doha", "coords": [25.276987, 51.520008] },
+          { "name": "Al Rayyan", "coords": [25.2908, 51.4360] },
+          { "name": "Umm Salal", "coords": [25.3902, 51.4814] }
+        ],
+        "Romania": [
+          { "name": "Bucharest", "coords": [44.4268, 26.1025] },
+          { "name": "Cluj-Napoca", "coords": [46.7712, 23.6236] },
+          { "name": "Timișoara", "coords": [45.7489, 21.2087] }
+        ],
+        "Russia": [
+          { "name": "Moscow", "coords": [55.7558, 37.6173] },
+          { "name": "Saint Petersburg", "coords": [59.9343, 30.3351] },
+          { "name": "Novosibirsk", "coords": [55.0084, 82.9357] }
+        ],
+        "Rwanda": [
+          { "name": "Kigali", "coords": [-1.9644, 30.0619] },
+          { "name": "Butare", "coords": [-2.5981, 29.7467] },
+          { "name": "Gisenyi", "coords": [-1.9670, 29.2473] }
+        ],
+        "Saint Kitts and Nevis": [
+          { "name": "Basseterre", "coords": [17.3026, -62.7177] },
+          { "name": "Charlestown", "coords": [17.1834, -62.5838] },
+          { "name": "Frigate Bay", "coords": [17.2760, -62.6922] }
+        ],
+     
+            "Saint Lucia": [
+              { "name": "Castries", "coords": [14.0101, -60.9784] },
+              { "name": "Vieux Fort", "coords": [13.7167, -60.9489] },
+              { "name": "Soufrière", "coords": [13.9750, -61.0738] }
+            ],
+            "Saint Vincent and the Grenadines": [
+              { "name": "Kingstown", "coords": [13.1625, -61.2248] },
+              { "name": "Bequia", "coords": [13.0030, -61.2249] },
+              { "name": "Grenaida", "coords": [12.9995, -61.4515] }
+            ],
+            "Samoa": [
+              { "name": "Apia", "coords": [-13.8333, -171.7833] },
+              { "name": "A'ana", "coords": [-13.9440, -171.7330] },
+              { "name": "Savai'i", "coords": [-13.5833, -172.0000] }
+            ],
+            "San Marino": [
+              { "name": "San Marino", "coords": [43.9333, 12.4469] },
+              { "name": "Serravalle", "coords": [43.9330, 12.4614] },
+              { "name": "Borgo Maggiore", "coords": [43.9333, 12.4667] }
+            ],
+            "Sao Tome and Principe": [
+              { "name": "São Tomé", "coords": [0.3365, 6.7273] },
+              { "name": "Principe", "coords": [1.5962, 7.4450] },
+              { "name": "Neves", "coords": [0.3570, 6.7242] }
+            ],
+            "Saudi Arabia": [
+              { "name": "Riyadh", "coords": [24.7136, 46.6753] },
+              { "name": "Jeddah", "coords": [21.2854, 39.2376] },
+              { "name": "Dammam", "coords": [26.4207, 49.9901] }
+            ],
+            "Senegal": [
+              { "name": "Dakar", "coords": [14.6928, -17.4467] },
+              { "name": "Saint-Louis", "coords": [16.0010, -16.4911] },
+              { "name": "Kaolack", "coords": [14.1579, -16.1870] }
+            ],
+            "Serbia": [
+              { "name": "Belgrade", "coords": [44.7866, 20.4489] },
+              { "name": "Novi Sad", "coords": [45.2671, 19.8335] },
+              { "name": "Niš", "coords": [43.3151, 21.8958] }
+            ],
+            "Seychelles": [
+              { "name": "Victoria", "coords": [-4.6167, 55.4500] },
+              { "name": "Bel Ombre", "coords": [-4.6833, 55.4333] },
+              { "name": "Anse Royale", "coords": [-4.7101, 55.5170] }
+            ],
+            "Sierra Leone": [
+              { "name": "Freetown", "coords": [8.4657, -13.2348] },
+              { "name": "Bo", "coords": [7.1167, -11.7139] },
+              { "name": "Kenema", "coords": [7.8895, -11.1881] }
+            ],
+            "Singapore": [
+              { "name": "Singapore", "coords": [1.3521, 103.8198] },
+              { "name": "Jurong East", "coords": [1.3340, 103.7333] },
+              { "name": "Tampines", "coords": [1.3541, 103.9436] }
+            ],
+            "Slovakia": [
+              { "name": "Bratislava", "coords": [48.1482, 17.1067] },
+              { "name": "Košice", "coords": [48.7200, 21.2611] },
+              { "name": "Prešov", "coords": [48.9980, 21.2394] }
+            ],
+            "Slovenia": [
+              { "name": "Ljubljana", "coords": [46.0569, 14.5051] },
+              { "name": "Maribor", "coords": [46.5547, 15.6455] },
+              { "name": "Celje", "coords": [46.2370, 15.2650] }
+            ],
+            "Solomon Islands": [
+              { "name": "Honiara", "coords": [-9.4300, 160.0000] },
+              { "name": "Gizo", "coords": [-8.1000, 156.0000] },
+              { "name": "Auki", "coords": [-9.0466, 160.6500] }
+            ],
+            "Somalia": [
+              { "name": "Mogadishu", "coords": [2.0469, 45.3182] },
+              { "name": "Hargeisa", "coords": [9.5605, 44.0634] },
+              { "name": "Bosaso", "coords": [11.2800, 49.1560] }
+            ],
+            "South Africa": [
+              { "name": "Pretoria", "coords": [-25.7461, 28.1881] },
+              { "name": "Cape Town", "coords": [-33.9249, 18.4241] },
+              { "name": "Johannesburg", "coords": [-26.2041, 28.0473] }
+            ],
+            "South Korea": [
+              { "name": "Seoul", "coords": [37.5665, 126.9780] },
+              { "name": "Busan", "coords": [35.1796, 129.0756] },
+              { "name": "Incheon", "coords": [37.4563, 126.7052] }
+            ],
+            "Spain": [
+              { "name": "Madrid", "coords": [40.4168, -3.7038] },
+              { "name": "Barcelona", "coords": [41.3851, 2.1734] },
+              { "name": "Valencia", "coords": [39.4699, -0.3763] }
+            ],
+            "Sri Lanka": [
+              { "name": "Sri Jayawardenepura Kotte", "coords": [6.9271, 79.9584] },
+              { "name": "Colombo", "coords": [6.9271, 79.9553] },
+              { "name": "Kandy", "coords": [7.2906, 80.6328] }
+            ],
+            "Sudan": [
+              { "name": "Khartoum", "coords": [15.5007, 32.5599] },
+              { "name": "Omdurman", "coords": [15.6680, 32.4874] },
+              { "name": "Port Sudan", "coords": [19.1022, 37.2004] }
+            ],
+            "Suriname": [
+              { "name": "Paramaribo", "coords": [5.8690, -55.1672] },
+              { "name": "Nieuw Nickerie", "coords": [5.9331, -56.0451] },
+              { "name": "Moengo", "coords": [5.2000, -54.0167] }
+            ],
+            "Sweden": [
+              { "name": "Stockholm", "coords": [59.3293, 18.0686] },
+              { "name": "Gothenburg", "coords": [57.7089, 11.9746] },
+              { "name": "Malmö", "coords": [55.6040, 13.0038] }
+            ],
+            "Switzerland": [
+              { "name": "Bern", "coords": [46.9480, 7.4474] },
+              { "name": "Zurich", "coords": [47.3769, 8.5417] },
+              { "name": "Geneva", "coords": [46.2044, 6.1432] }
+            ],
+            "Syria": [
+              { "name": "Damascus", "coords": [33.5138, 36.2765] },
+              { "name": "Aleppo", "coords": [36.2021, 37.1343] },
+              { "name": "Homs", "coords": [34.7315, 36.7181] }
+            ],
+            "Taiwan": [
+              { "name": "Taipei", "coords": [25.0330, 121.5654] },
+              { "name": "Taichung", "coords": [24.1477, 120.6736] },
+              { "name": "Kaohsiung", "coords": [22.6273, 120.3014] }
+            ],
+            "Tajikistan": [
+              { "name": "Dushanbe", "coords": [38.5599, 68.7870] },
+              { "name": "Khujand", "coords": [40.2858, 69.6002] },
+              { "name": "Kulob", "coords": [37.9120, 69.2783] }
+            ],
+            "Tanzania": [
+              { "name": "Dodoma", "coords": [-6.7924, 35.8309] },
+              { "name": "Dar es Salaam", "coords": [-6.7924, 39.2083] },
+              { "name": "Arusha", "coords": [-3.3862, 36.6827] }
+            ],
+            "Thailand": [
+              { "name": "Bangkok", "coords": [13.7563, 100.5018] },
+              { "name": "Chiang Mai", "coords": [18.7883, 98.9853] },
+              { "name": "Pattaya", "coords": [12.9276, 100.8825] }
+            ],
+            "Timor-Leste": [
+              { "name": "Dili", "coords": [-8.5560, 125.5603] },
+              { "name": "Baucau", "coords": [-8.4606, 126.4588] },
+              { "name": "Liquiçá", "coords": [-8.4833, 125.0617] }
+            ],
+            "Togo": [
+              { "name": "Lomé", "coords": [6.1725, 1.2316] },
+              { "name": "Sokodé", "coords": [8.9962, 0.2263] },
+              { "name": "Kara", "coords": [9.5500, 1.1829] }
+            ],
+            "Tonga": [
+              { "name": "Nuku'alofa", "coords": [-21.1351, -175.2040] },
+              { "name": "Neiafu", "coords": [-18.6500, -173.9833] },
+              { "name": "Vava'u", "coords": [-18.6550, -173.9830] }
+            ],
+            "Trinidad and Tobago": [
+              { "name": "Port of Spain", "coords": [10.6556, -61.4823] },
+              { "name": "San Fernando", "coords": [10.2830, -61.4500] },
+              { "name": "Scarborough", "coords": [11.1839, -60.7302] }
+            ],
+            "Tunisia": [
+              { "name": "Tunis", "coords": [36.8065, 10.1815] },
+              { "name": "Sfax", "coords": [34.7404, 10.7603] },
+              { "name": "Sousse", "coords": [35.8255, 10.6399] }
+            ],
+            "Turkey": [
+              { "name": "Ankara", "coords": [39.9334, 32.8597] },
+              { "name": "Istanbul", "coords": [41.0082, 28.9784] },
+              { "name": "Izmir", "coords": [38.4192, 27.1287] }
+            ],
+            "Turkmenistan": [
+              { "name": "Ashgabat", "coords": [37.9601, 58.3261] },
+              { "name": "Turkmenabat", "coords": [39.0772, 63.9998] },
+              { "name": "Mary", "coords": [37.6053, 61.8372] }
+            ],
+            "Tuvalu": [
+              { "name": "Funafuti", "coords": [-7.1095, 179.1940] },
+              { "name": "Nanumea", "coords": [-7.0306, 179.8100] },
+              { "name": "Nukufetau", "coords": [-7.7300, 179.9000] }
+            ],
+            "Uganda": [
+              { "name": "Kampala", "coords": [0.3476, 32.5825] },
+              { "name": "Entebbe", "coords": [0.0637, 32.4413] },
+              { "name": "Mbarara", "coords": [0.6058, 30.6590] }
+            ],
+            "Ukraine": [
+              { "name": "Kyiv", "coords": [50.4501, 30.5234] },
+              { "name": "Kharkiv", "coords": [49.9935, 36.2304] },
+              { "name": "Odesa", "coords": [46.4825, 30.7233] }
+            ],
+            "United Arab Emirates": [
+              { "name": "Abu Dhabi", "coords": [24.4539, 54.3773] },
+              { "name": "Dubai", "coords": [25.2769, 55.2963] },
+              { "name": "Sharjah", "coords": [25.3463, 55.4209] }
+            ],
+            "United Kingdom": [
+              { "name": "London", "coords": [51.5074, -0.1278] },
+              { "name": "Birmingham", "coords": [52.4862, -1.8904] },
+              { "name": "Manchester", "coords": [53.4808, -2.2426] }
+            ],
+            "United States of America": [
+              { "name": "New York City", "coords": [40.7128, -74.0060] },
+              { "name": "Los Angeles", "coords": [34.0522, -118.2437] },
+              { "name": "Chicago", "coords": [41.8781, -87.6298] }
+            ]
+          
+}
