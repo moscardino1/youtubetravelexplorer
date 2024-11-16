@@ -1,0 +1,36 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Map Explorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+</head>
+<body>
+    <div class="controls">
+        <select id="language">
+            <option value="English">English</option>
+            <option value="Italiano">Italiano</option>
+            <option value="Español">Español</option>
+            <option value="Français">Français</option>
+            <option value="Deutsch">Deutsch</option>
+        </select>
+        <select id="category">
+            <option value="travel vlog">Travel Vlog</option>
+            <option value="walking tour">Walking Tour</option>
+            <option value="documentary">Documentary</option>
+        </select>
+    </div>
+    
+    <div id="map"></div>
+    
+    <div id="videos-overlay" class="videos-container">
+        <div id="videos-list"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
