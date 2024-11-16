@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, abort
 import os
 import logging
 from googleapiclient.discovery import build
@@ -38,15 +38,20 @@ def index():
 
 @app.route('/search', methods=['POST'])
 def search_videos():
-    logger.info("Search endpoint accessed")
-    
-    # Log incoming request data
     data = request.get_json()
-    logger.info(f"Received search request with data: {data}")
     
-    country = data.get('country')
-    language = data.get('language', 'English')
-    category = data.get('category', 'travel vlog')
+    # Validate incoming data
+    if not data or 'country' not in data or 'language' not in data:
+        abort(400)  # Bad request if required fields are missing
+
+    country = data['country']
+    language = data['language']
+    category = data.get('category', 'travel vlog')  # Default category
+
+    # Additional validation can be added here (e.g., check for valid values)
+    
+    logger.info("Search endpoint accessed")
+    logger.info(f"Received search request with data: {data}")
     
     search_query = f"{country} {language} {category}"
     logger.info(f"Constructed search query: {search_query}")
@@ -57,16 +62,13 @@ def search_videos():
             part="snippet",
             q=search_query,
             type="video",
-            maxResults=10,
+            maxResults=5,
             relevanceLanguage=language[:2] if len(language) >= 2 else 'en'
         )
         
         logger.info("Executing YouTube API request")
         response = youtube_request.execute()
         logger.info(f"Received {len(response.get('items', []))} results from YouTube API")
-        
-        # Log the raw response for debugging
-        logger.debug(f"Raw YouTube API response: {response}")
         
         videos = []
         for item in response.get('items', []):

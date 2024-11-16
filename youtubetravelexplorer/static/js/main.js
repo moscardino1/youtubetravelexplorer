@@ -1,7 +1,7 @@
 // static/js/main.js
 console.log('Initializing map application');
 
-const map = L.map('map').setView([20, 0], 2);
+const map = L.map('map').setView([0, 0], 1.5);
 let selectedCountry = null;
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
