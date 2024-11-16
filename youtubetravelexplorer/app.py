@@ -32,9 +32,16 @@ except Exception as e:
     logger.error(f"Failed to build YouTube API client: {str(e)}")
 
 @app.route('/')
-def index():
-    logger.info("Homepage accessed")
+def home():
     return render_template('index.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/info')
+def info():
+    return render_template('info.html')
 
 @app.route('/search', methods=['POST'])
 def search_videos():
@@ -67,7 +74,7 @@ def search_videos():
         )
         
         logger.info("Executing YouTube API request")
-        response = 's' #youtube_request.execute()
+        response =  youtube_request.execute()
         logger.info(f"Received {len(response.get('items', []))} results from YouTube API")
         
         videos = []

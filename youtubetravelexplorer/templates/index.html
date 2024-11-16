@@ -34,16 +34,20 @@
                 <option value="walking tour">Walking Tour</option>
                 <option value="documentary">Documentary</option>
             </select>
-
-        </div>
+                </div>
         
-        <!-- Donate Button -->
-        <div class="text-center mb-4">
-            <a href="/donate" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Donate</a>
-        </div>
+        <!-- Weather Display -->
+        <div id="weather-info" class="text-center mb-4 text-gray-700"></div>
+
+ 
         
         <div id="map" class="h-96 mb-4"></div>
-        
+                <!-- Buttons below the map -->
+                <div class="flex justify-center space-x-4 mb-4">
+                    <a href="/contact" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Contact Us</a>
+                    <a href="/info" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">How It Works</a>
+                    <a href="/donate" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">Donate</a>
+                </div>
         <div id="videos-overlay" class="videos-container">
             <div id="videos-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
         </div>

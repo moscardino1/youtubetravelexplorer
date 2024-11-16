@@ -96,7 +96,8 @@ function fetchMajorCities(country) {
                 marker.on('click', () => {
                     console.log(`City selected: ${city.name}`);
                     selectedCity = city.name; // Set the selected city
-                    searchVideos(country, selectedCity); // Trigger search for the selected city
+                    searchVideos(country, selectedCity); // Trigger YouTube search before fetching weather
+                    fetchWeather(city.coords, city.name); // Fetch weather for the selected city using coordinates
                 });
                 cityMarkers.push(marker); // Store the marker for later removal
             });
@@ -106,6 +107,52 @@ function fetchMajorCities(country) {
         selectedCity = null; // Reset selected city if no cities found
         searchVideos(country, selectedCity); // Trigger search by country
     }
+}
+
+// Function to fetch weather data for a city using coordinates from cities_config.json
+function fetchWeather(coords, cityName) {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${coords[0]}&longitude=${coords[1]}&current_weather=true`;
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) throw new Error('Weather data not found');
+            return response.json();
+        })
+        .then(data => {
+            const temperatureC = data.current_weather.temperature; // Temperature in Celsius
+            const temperatureF = (temperatureC * 9/5) + 32; // Convert to Fahrenheit
+            displayWeather(cityName, temperatureC, temperatureF); // Display weather info
+        })
+        .catch(error => console.error('Error fetching weather data:', error));
+}
+
+// Function to display weather information
+function displayWeather(cityName, tempC, tempF) {
+    const weatherInfo = `
+        <div>
+            <h3>${cityName}</h3>
+            <p>Temperature: <span id="temp-display">${tempC} °C</span></p>
+            <button id="toggle-temp">Switch to °F</button>
+        </div>
+    `;
+    
+    // Create a popup for the weather information
+    const popup = L.popup()
+        .setLatLng(cityMarkers.find(marker => marker.getPopup().getContent().includes(cityName)).getLatLng())
+        .setContent(weatherInfo)
+        .openOn(map);
+
+    // Add event listener for the toggle button
+    document.getElementById('toggle-temp').addEventListener('click', () => {
+        const tempDisplay = document.getElementById('temp-display');
+        if (tempDisplay.innerText.includes('°C')) {
+            tempDisplay.innerText = `${tempF.toFixed(1)} °F`; // Display Fahrenheit
+            document.getElementById('toggle-temp').innerText = 'Switch to °C'; // Update button text
+        } else {
+            tempDisplay.innerText = `${tempC} °C`; // Display Celsius
+            document.getElementById('toggle-temp').innerText = 'Switch to °F'; // Update button text
+        }
+    });
 }
 
 // Remove city markers when clicking outside the country
