@@ -47,13 +47,13 @@ def search_videos():
     country = data['country']
     language = data['language']
     category = data.get('category', 'travel vlog')  # Default category
+    city = data.get('city', '')  # Get city from the request
 
-    # Additional validation can be added here (e.g., check for valid values)
+    # Construct the search query to include the city
+    search_query = f"{city}, {country} {language} {category}" if city else f"{country} {language} {category}"
     
     logger.info("Search endpoint accessed")
     logger.info(f"Received search request with data: {data}")
-    
-    search_query = f"{country} {language} {category}"
     logger.info(f"Constructed search query: {search_query}")
     
     try:
