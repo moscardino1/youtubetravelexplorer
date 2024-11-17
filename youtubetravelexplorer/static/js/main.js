@@ -43,6 +43,8 @@ fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/coun
                     selectedCountry = feature.properties.ADMIN;
                     selectedCity = null; // Reset selected city when a new country is selected
                     fetchMajorCities(selectedCountry); // Fetch and display major cities
+                    fetchWikiSummary(selectedCountry);  // Add this line to trigger the Wikipedia summary fetch
+
                 });
                 
                 layer.on('mouseover', (e) => {
@@ -113,6 +115,8 @@ fetch('/static/cities_config.json')
                         selectedCity = city.name;  // Set the selected city
                         searchVideos(country, selectedCity);  // Trigger search for all platforms
                         fetchWeather(city.coords, city.name);  // Fetch weather for the selected city using coordinates
+                        fetchWikiSummary(selectedCity);  // Add this line to trigger the Wikipedia summary fetch
+
                     });
                     
                     cityMarkers.push(marker); // Store the marker for later removal
@@ -307,3 +311,22 @@ function displayVideos(videos) {
         videoContainer.innerHTML = '<p>No videos found.</p>'; // Handle no videos case
     }
 }
+function fetchWikiSummary(title) {
+    // URL encode the title
+    const encodedTitle = encodeURIComponent(title);
+
+    fetch(`/wiki-summary/${encodedTitle}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.summary) {
+                document.getElementById('wiki-summary').innerHTML = data.summary;
+            } else {
+                document.getElementById('wiki-summary').innerHTML = 'Summary not available.';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching Wikipedia data:', error);
+            document.getElementById('wiki-summary').innerHTML = 'Failed to fetch data.';
+        });
+}
+

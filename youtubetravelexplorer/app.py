@@ -8,6 +8,7 @@ from io import BytesIO
 from datetime import datetime
 import qrcode
 import base64
+import requests
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -104,6 +105,38 @@ def donate():
     qr_image = base64.b64encode(buffered.getvalue()).decode('utf-8')
     
     return render_template('donate.html', usdt_address=USDT_ADDRESS, qr_image=qr_image)
+
+from urllib.parse import quote
+
+@app.route('/wiki-summary/<title>', methods=['GET'])
+def wiki_summary(title):
+    try:
+        # URL-encode the title to handle spaces and special characters
+        encoded_title = quote(title)
+
+        # Construct the Wikipedia API URL
+        wiki_url = f"https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=true&titles={encoded_title}"
+        
+        # Fetch the data from Wikipedia
+        response = requests.get(wiki_url)
+        
+        # If the request is successful
+        if response.status_code == 200:
+            data = response.json()
+            pages = data['query']['pages']
+            page = list(pages.values())[0]  # Get the first page result
+            summary = page.get('extract', 'No summary available.')
+            
+            # Return the summary as JSON
+            return jsonify({
+                'summary': summary,
+                'title': title
+            })
+        else:
+            return jsonify({'error': 'Error fetching Wikipedia data'}), 500
+    except Exception as e:
+        return jsonify({'error': f'Failed to fetch Wikipedia data: {str(e)}'}), 500
+
 
 # Add request logging middleware
 @app.before_request

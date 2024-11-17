@@ -39,10 +39,27 @@
                 <option value="documentary">Documentary</option>
             </select>
         </div>
+        
+    <!-- Container for the layout -->
+    <div class="container mx-auto p-5">
 
-        <!-- Map container -->
-        <div id="map" class="h-96 mb-6"></div>
+        <!-- Map Container: Flex for Layout -->
+        <div id="map-container" class="flex flex-col lg:flex-row w-full h-screen gap-5">
+    
+          <!-- Map Section -->
+          <div id="map" class="flex-1 rounded-lg shadow-md h-[60vh] lg:h-[80vh]"></div>
+    
+          <!-- Wiki Summary Section -->
+          <div id="wiki-summary-container" class="w-full lg:w-96 bg-gray-100 p-5 shadow-md rounded-lg overflow-y-auto h-[30vh] lg:h-[80vh]">
+            <div id="wiki-summary" class="text-sm leading-relaxed">
+              <!-- Wiki Summary Content Here -->
+            </div>
+          </div>
+    
+        </div>
+      </div>
 
+        
         <!-- Videos Overlay -->
         <div id="videos-overlay" class="relative">
             <div id="video-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
