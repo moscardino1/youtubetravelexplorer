@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How It Works</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
@@ -11,20 +13,21 @@
         <h1 class="text-2xl font-bold text-center mb-4">How It Works</h1>
         <div class="mb-4">
             <h2 class="text-xl font-semibold">Overview</h2>
-            <p>This application allows users to explore YouTube videos related to specific countries and cities on a map. Users can click on a country to view major cities and select a city to see related videos and current weather information.</p>
+            <p>This application allows users to explore videos related to specific countries and cities on a map. Users can click on a country to view major cities and select a city to see related videos and current weather information.</p>
         </div>
         <div class="mb-4">
             <h2 class="text-xl font-semibold">APIs Used</h2>
             <ul class="list-disc pl-5">
                 <li><strong>YouTube Data API:</strong> Used to fetch videos related to the selected country or city.</li>
+                <li><strong>Vimeo API:</strong> Used to fetch videos from Vimeo based on the search query.</li>
+                <li><strong>Dailymotion API:</strong> Used to fetch videos from Dailymotion based on the search query.</li>
                 <li><strong>Open-Meteo API:</strong> Used to fetch current weather data based on the selected city's coordinates.</li>
             </ul>
         </div>
         <div class="mb-4">
             <h2 class="text-xl font-semibold">Legal Considerations</h2>
-            <p>All API usage complies with the respective terms of service. The YouTube Data API is used in accordance with YouTube's API policies, and the Open-Meteo API is used as per their guidelines. Ensure that you have the necessary permissions and adhere to the usage limits set by these APIs.</p>
+            <p>All API usage complies with the respective terms of service. The YouTube Data API, Vimeo API, and Dailymotion API are used in accordance with their policies. Ensure that you have the necessary permissions and adhere to the usage limits set by these APIs.</p>
         </div>
-
     </div>
 </body>
 </html> 

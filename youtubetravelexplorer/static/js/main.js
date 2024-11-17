@@ -1,4 +1,3 @@
-// static/js/main.js
 console.log('Initializing map application');
 
 const map = L.map('map').setView([20, 0], 2);
@@ -42,6 +41,7 @@ fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/coun
                 layer.on('click', () => {
                     console.log(`Country selected: ${feature.properties.ADMIN}`);
                     selectedCountry = feature.properties.ADMIN;
+                    selectedCity = null; // Reset selected city when a new country is selected
                     fetchMajorCities(selectedCountry); // Fetch and display major cities
                 });
                 
@@ -77,37 +77,54 @@ fetch('/static/cities_config.json')
         console.log('Cities configuration loaded successfully');
     })
     .catch(error => console.error('Error loading cities configuration:', error));
-
-// Function to fetch major cities based on the selected country
-function fetchMajorCities(country) {
-    console.log(`Fetching major cities for: ${country}`); // Debug log
-    // Clear existing city markers
-    cityMarkers.forEach(marker => map.removeLayer(marker));
-    cityMarkers = [];
-
-    // Check if the country exists in the configuration
-    if (citiesConfig[country]) {
-        console.log(`Found cities for ${country}:`, citiesConfig[country]); // Debug log
-        setTimeout(() => {
-            citiesConfig[country].forEach(city => {
-                console.log(`Adding city: ${city.name} at ${city.coords}`); // Debug log
-                const marker = L.marker(city.coords).addTo(map);
-                marker.bindPopup(city.name);
-                marker.on('click', () => {
-                    console.log(`City selected: ${city.name}`);
-                    selectedCity = city.name; // Set the selected city
-                    searchVideos(country, selectedCity); // Trigger YouTube search before fetching weather
-                    fetchWeather(city.coords, city.name); // Fetch weather for the selected city using coordinates
+    function fetchMajorCities(country) {
+        console.log(`Fetching major cities for: ${country}`); // Debug log
+        // Clear existing city markers
+        cityMarkers.forEach(marker => map.removeLayer(marker));
+        cityMarkers = [];
+        const icon = L.icon({
+            iconUrl: 'static/Angle Up_3.png',
+            iconSize: [32, 32],  // Adjust icon size
+            iconAnchor: [16, 32],  // Anchor the icon at its bottom center
+            popupAnchor: [0, -32]  // Position the popup above the marker
+        });
+        // Check if the country exists in the configuration
+        if (citiesConfig[country]) {
+            console.log(`Found cities for ${country}:`, citiesConfig[country]); // Debug log
+            setTimeout(() => {
+                citiesConfig[country].forEach(city => {
+                    console.log(`Adding city: ${city.name} at ${city.coords}`); // Debug log
+                    const marker = L.marker(city.coords, { icon: icon }).addTo(map);
+                    marker.bindPopup(city.name, {
+                        offset: L.point(0, -20)  // Adjust popup position if needed
+                    });    
+                    // Bind popup to the marker to show city name on click
+                    marker.bindPopup(city.name);
+    
+                    // Bind tooltip to the marker to show city name on hover
+                    marker.bindTooltip(city.name, {
+                        permanent: false,
+                        direction: 'top',
+                        opacity: 0.8
+                    });
+    
+                    marker.on('click', () => {
+                        console.log(`City selected: ${city.name}`);
+                        selectedCity = city.name;  // Set the selected city
+                        searchVideos(country, selectedCity);  // Trigger search for all platforms
+                        fetchWeather(city.coords, city.name);  // Fetch weather for the selected city using coordinates
+                    });
+                    
+                    cityMarkers.push(marker); // Store the marker for later removal
                 });
-                cityMarkers.push(marker); // Store the marker for later removal
-            });
-        }, 100); // Delay of 100ms
-    } else {
-        console.log(`No major cities found for ${country}, searching by country instead.`);
-        selectedCity = null; // Reset selected city if no cities found
-        searchVideos(country, selectedCity); // Trigger search by country
+            }, 100); // Delay of 100ms
+        } else {
+            console.log(`No major cities found for ${country}, searching by country instead.`);
+            selectedCity = null; // Reset selected city if no cities found
+            searchVideos(country, selectedCity); // Trigger search by country
+        }
     }
-}
+    
 
 // Function to fetch weather data for a city using coordinates from cities_config.json
 function fetchWeather(coords, cityName) {
@@ -128,13 +145,13 @@ function fetchWeather(coords, cityName) {
 
 // Function to display weather information
 function displayWeather(cityName, tempC, tempF) {
-    const weatherInfo = `
-        <div>
+    const weatherInfo = 
+        `<div>
             <h3>${cityName}</h3>
             <p>Temperature: <span id="temp-display">${tempC} °C</span></p>
             <button id="toggle-temp">Switch to °F</button>
-        </div>
-    `;
+        </div>`
+    ;
     
     // Create a popup for the weather information
     const popup = L.popup()
@@ -143,16 +160,19 @@ function displayWeather(cityName, tempC, tempF) {
         .openOn(map);
 
     // Add event listener for the toggle button
-    document.getElementById('toggle-temp').addEventListener('click', () => {
-        const tempDisplay = document.getElementById('temp-display');
-        if (tempDisplay.innerText.includes('°C')) {
-            tempDisplay.innerText = `${tempF.toFixed(1)} °F`; // Display Fahrenheit
-            document.getElementById('toggle-temp').innerText = 'Switch to °C'; // Update button text
-        } else {
-            tempDisplay.innerText = `${tempC} °C`; // Display Celsius
-            document.getElementById('toggle-temp').innerText = 'Switch to °F'; // Update button text
-        }
-    });
+    const toggleButton = document.getElementById('toggle-temp');
+    if (toggleButton) {
+        toggleButton.addEventListener('click', () => {
+            const tempDisplay = document.getElementById('temp-display');
+            if (tempDisplay.innerText.includes('°C')) {
+                tempDisplay.innerText = `${tempF.toFixed(1)} °F`; // Display Fahrenheit
+                toggleButton.innerText = 'Switch to °C'; // Update button text
+            } else {
+                tempDisplay.innerText = `${tempC} °C`; // Display Celsius
+                toggleButton.innerText = 'Switch to °F'; // Update button text
+            }
+        });
+    }
 }
 
 // Remove city markers when clicking outside the country
@@ -179,11 +199,12 @@ function generateCacheKey(country, city, language, category) {
     return `${country}-${city || 'no-city'}-${language}-${category}`; // Unique key based on search parameters
 }
 
+// Show loading overlay when a country or city is selected
 function searchVideos(country, city) {
     const language = document.getElementById('language').value;
     const category = document.getElementById('category').value;
 
-    console.log(`Searching videos for:`, { country, language, category, city });
+    console.log('Searching videos for:', { country, language, category, city });
 
     // Construct the search query to include the city if it exists
     const searchQuery = city ? `${city}, ${country} ${language} ${category}` : `${country} ${language} ${category}`;
@@ -207,6 +228,16 @@ function searchVideos(country, city) {
         }
     }
 
+    // Clear previous videos before showing loading
+    const videoContainer = document.getElementById('video-container');
+    videoContainer.innerHTML = ''; // Clear previous videos
+
+    // Show loading overlay with a slight delay
+    const loadingOverlay = document.getElementById('loading');
+    setTimeout(() => {
+        loadingOverlay.classList.remove('hidden'); // Show loading overlay
+    }, 100); // Delay to avoid flickering
+
     // Call debounce with a function that performs the fetch
     debounce(() => {
         fetch('/search', {
@@ -219,57 +250,60 @@ function searchVideos(country, city) {
             return response.json();
         })
         .then(data => {
+            // Hide loading overlay
+            loadingOverlay.classList.add('hidden'); // Hide loading overlay
+
             if (data.error) {
                 console.error('Error from server:', data.error);
                 alert(`Error: ${data.error}`);
             } else {
                 // Cache the results with a timestamp
-                const cacheValue = {
+                localStorage.setItem(cacheKey, JSON.stringify({
                     videos: data.videos,
-                    timestamp: Date.now() // Store the current timestamp
-                };
-                localStorage.setItem(cacheKey, JSON.stringify(cacheValue));
+                    timestamp: Date.now(),
+                }));
                 displayVideos(data.videos);
             }
         })
-        .catch(error => console.error('Error fetching videos:', error));
-    }, 500); // 500ms delay
+        .catch(error => {
+            loadingOverlay.classList.add('hidden'); // Hide loading overlay in case of error
+            console.error('Error fetching videos:', error);
+            alert('Error fetching videos');
+        });
+    }, 500); // Debounce the request to avoid rapid consecutive calls
 }
 
-const displayVideos = (videos) => {
-    console.log(`Displaying ${videos.length} videos`);
-    const videosList = document.getElementById('videos-list');
-    videosList.innerHTML = '';
+
+// Function to display videos in the UI
+function displayVideos(videos) {
+    console.log('Displaying videos:', videos);
+    const videoContainer = document.getElementById('video-container');
     
-    videos.forEach((video, index) => {
-        console.log(`Processing video ${index + 1}:`, video.title);
-        const videoElement = document.createElement('div');
-        videoElement.className = 'video-item border rounded-lg shadow-md p-4 cursor-pointer transition-transform transform hover:scale-105';
-        videoElement.innerHTML = `
-            <img src="${video.thumbnail}" alt="${video.title}" class="w-full h-32 object-cover rounded-md mb-2">
-            <h3 class="font-semibold text-lg">${video.title}</h3>
-            <p class="text-gray-600">${video.channelTitle}</p>
-            <small class="text-gray-500">Published: ${new Date(video.publishedAt).toLocaleDateString()}</small>
-        `;
-        
-        videoElement.addEventListener('click', () => {
-            console.log(`Opening video: ${video.videoId}`);
-            window.open(`https://www.youtube.com/watch?v=${video.videoId}`, '_blank');
+    if (!videoContainer) {
+        console.error('Video container not found');
+        return; // Exit if the container is not found
+    }
+
+    videoContainer.innerHTML = ''; // Clear previous videos
+
+    // Check if there are videos in the response
+    if (videos.youtube && videos.youtube.length > 0) {
+        videos.youtube.forEach(video => {
+            const videoElement = document.createElement('div');
+            videoElement.className = 'video-item border rounded-lg shadow-md p-4 cursor-pointer transition-transform transform hover:scale-105';
+            videoElement.innerHTML = `
+                <img src="${video.thumbnail}" alt="${video.title}" class="w-full h-32 object-cover rounded-md mb-2">
+                <h3 class="font-semibold text-lg">${video.title}</h3>
+                <p class="text-gray-600">${video.channelTitle}</p>`;
+            
+            videoElement.addEventListener('click', () => {
+                console.log(`Opening video: ${video.url}`);
+                window.open(`${video.url}`, '_blank');
+            });
+            
+            videoContainer.appendChild(videoElement);
         });
-        
-        videosList.appendChild(videoElement);
-    });
-};
-
-// Update results when language or category changes
-document.getElementById('language').addEventListener('change', () => {
-    console.log('Language changed:', document.getElementById('language').value);
-    if (selectedCountry) searchVideos(selectedCountry, selectedCity);
-});
-
-document.getElementById('category').addEventListener('change', () => {
-    console.log('Category changed:', document.getElementById('category').value);
-    if (selectedCountry) searchVideos(selectedCountry, selectedCity);
-});
-
-console.log('Application initialization complete');
+    } else {
+        videoContainer.innerHTML = '<p>No videos found.</p>'; // Handle no videos case
+    }
+}
