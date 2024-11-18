@@ -1,10 +1,9 @@
 /* Body background */
 body {
-    background-color: transparent; /* No background color */
+    background-color: #f9f9f9; /* Light background color */
     font-family: 'Arial', sans-serif; /* Simple, clean font */
     color: #333; /* Default text color */
 }
-  
 
 /* Map container */
 #map {
@@ -42,4 +41,18 @@ body {
     padding: 20px;
 }
 
-
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    #map-container {
+        flex-direction: column;
+    }
+    #map {
+        height: 40vh;
+    }
+    #wiki-summary-container {
+        height: 40vh;
+    }
+}
