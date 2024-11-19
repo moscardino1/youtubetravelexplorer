@@ -265,8 +265,7 @@ function displayVideos(videos) {
             videoElement.className = 'video-item border rounded-lg shadow-md p-4 cursor-pointer transition-transform transform hover:scale-105';
             videoElement.innerHTML = `
                 <img src="${video.thumbnail}" alt="${video.title}" class="w-full h-32 object-cover rounded-md mb-2">
-                <h3 class="font-semibold text-lg">${video.title}</h3>
-                <p class="text-gray-600">${video.channelTitle}</p>`;
+                <h3 class="font-semibold text-lg">${video.title}</h3>`;
 
             videoElement.addEventListener('click', () => {
                 console.log(`Opening video: ${video.url}`);
@@ -315,4 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
             select.style.transform = 'translateY(0)';
         });
     });
+});
+window.addEventListener('resize', function() {
+    myMap.invalidateSize(); // Replace `myMap` with your map variable
 });
