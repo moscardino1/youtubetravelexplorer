@@ -5,6 +5,7 @@ let selectedCountry = null;
 let selectedCity = null;
 let cityMarkers = [];
 
+// Add tile layer to map
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(map);
@@ -27,7 +28,6 @@ fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/coun
             style: {
                 fillColor: '#3388ff',
                 weight: 1,
-                opacity: 1,
                 color: 'white',
                 fillOpacity: 0.3
             },
@@ -38,34 +38,16 @@ fetch('https://raw.githubusercontent.com/datasets/geo-countries/master/data/coun
                     opacity: 0.8
                 });
 
-                layer.on('click', () => {
-                    console.log(`Country selected: ${feature.properties.ADMIN}`);
-                    selectedCountry = feature.properties.ADMIN;
-                    selectedCity = null;
-                    fetchMajorCities(selectedCountry);
-                    fetchWikiSummary(selectedCountry);
-                });
-
-                layer.on('mouseover', (e) => {
-                    layer.setStyle({ fillOpacity: 0.7 });
-                    layer.openTooltip();
-                    const tooltip = layer.getTooltip();
-                    if (tooltip) {
-                        tooltip.setLatLng(e.latlng);
-                    }
-                });
-
-                layer.on('mouseout', () => {
-                    layer.setStyle({ fillOpacity: 0.3 });
-                    layer.closeTooltip();
-                });
+                layer.on('click', () => handleCountryClick(feature));
+                layer.on('mouseover', () => updateCountryStyle(layer, true));
+                layer.on('mouseout', () => updateCountryStyle(layer, false));
             }
         }).addTo(map);
         console.log('Country layer added to map');
     })
     .catch(error => console.error('Error loading country boundaries:', error));
 
-// Load major cities from the configuration file
+// Load cities configuration
 let citiesConfig = {};
 
 fetch('/static/cities_config.json')
@@ -79,10 +61,19 @@ fetch('/static/cities_config.json')
     })
     .catch(error => console.error('Error loading cities configuration:', error));
 
+function handleCountryClick(feature) {
+    console.log(`Country selected: ${feature.properties.ADMIN}`);
+    selectedCountry = feature.properties.ADMIN;
+    selectedCity = null;
+    fetchMajorCities(selectedCountry);
+    fetchWikiSummary(selectedCountry);
+}
+
 function fetchMajorCities(country) {
     console.log(`Fetching major cities for: ${country}`);
     cityMarkers.forEach(marker => map.removeLayer(marker));
     cityMarkers = [];
+
     const icon = L.icon({
         iconUrl: 'static/Angle Up_3.png',
         iconSize: [32, 32],
@@ -93,34 +84,35 @@ function fetchMajorCities(country) {
     if (citiesConfig[country]) {
         console.log(`Found cities for ${country}:`, citiesConfig[country]);
         setTimeout(() => {
-            citiesConfig[country].forEach(city => {
-                console.log(`Adding city: ${city.name} at ${city.coords}`);
-                const marker = L.marker(city.coords, { icon: icon }).addTo(map);
-                marker.bindPopup(city.name, {
-                    offset: L.point(0, -20)
-                });
-                marker.bindTooltip(city.name, {
-                    permanent: false,
-                    direction: 'top',
-                    opacity: 0.8
-                });
-
-                marker.on('click', () => {
-                    console.log(`City selected: ${city.name}`);
-                    selectedCity = city.name;
-                    searchVideos(country, selectedCity);
-                    fetchWeather(city.coords, city.name);
-                    fetchWikiSummary(selectedCity);
-                });
-
-                cityMarkers.push(marker);
-            });
+            citiesConfig[country].forEach(city => addCityMarker(city, icon));
         }, 100);
     } else {
-        console.log(`No major cities found for ${country}, searching by country instead.`);
+        console.log(`No major cities found for ${country}.`);
         selectedCity = null;
         searchVideos(country, selectedCity);
     }
+}
+
+function addCityMarker(city, icon) {
+    console.log(`Adding city: ${city.name} at ${city.coords}`);
+    const marker = L.marker(city.coords, { icon }).addTo(map);
+    marker.bindPopup(city.name, { offset: L.point(0, -20) });
+    marker.bindTooltip(city.name, {
+        permanent: false,
+        direction: 'top',
+        opacity: 0.8
+    });
+
+    marker.on('click', () => handleCityClick(city));
+    cityMarkers.push(marker);
+}
+
+function handleCityClick(city) {
+    console.log(`City selected: ${city.name}`);
+    selectedCity = city.name;
+    searchVideos(selectedCountry, selectedCity);
+    fetchWeather(city.coords, city.name);
+    fetchWikiSummary(selectedCity);
 }
 
 function fetchWeather(coords, cityName) {
@@ -132,39 +124,39 @@ function fetchWeather(coords, cityName) {
             return response.json();
         })
         .then(data => {
-            const temperatureC = data.current_weather.temperature;
-            const temperatureF = (temperatureC * 9/5) + 32;
-            displayWeather(cityName, temperatureC, temperatureF);
+            const { temperature } = data.current_weather;
+            displayWeather(cityName, temperature);
         })
         .catch(error => console.error('Error fetching weather data:', error));
 }
 
-function displayWeather(cityName, tempC, tempF) {
-    const weatherInfo =
-        `<div>
+function displayWeather(cityName, tempC) {
+    const tempF = (tempC * 9 / 5) + 32;
+    const weatherInfo = `
+        <div>
             <h3>${cityName}</h3>
             <p>Temperature: <span id="temp-display">${tempC} °C</span></p>
             <button id="toggle-temp">Switch to °F</button>
-        </div>`
-    ;
+        </div>
+    `;
 
     const popup = L.popup()
         .setLatLng(cityMarkers.find(marker => marker.getPopup().getContent().includes(cityName)).getLatLng())
         .setContent(weatherInfo)
         .openOn(map);
 
+    document.getElementById('toggle-temp').addEventListener('click', () => toggleTemperature(tempC, tempF));
+}
+
+function toggleTemperature(tempC, tempF) {
+    const tempDisplay = document.getElementById('temp-display');
     const toggleButton = document.getElementById('toggle-temp');
-    if (toggleButton) {
-        toggleButton.addEventListener('click', () => {
-            const tempDisplay = document.getElementById('temp-display');
-            if (tempDisplay.innerText.includes('°C')) {
-                tempDisplay.innerText = `${tempF.toFixed(1)} °F`;
-                toggleButton.innerText = 'Switch to °C';
-            } else {
-                tempDisplay.innerText = `${tempC} °C`;
-                toggleButton.innerText = 'Switch to °F';
-            }
-        });
+    if (tempDisplay.innerText.includes('°C')) {
+        tempDisplay.innerText = `${tempF.toFixed(1)} °F`;
+        toggleButton.innerText = 'Switch to °C';
+    } else {
+        tempDisplay.innerText = `${tempC} °C`;
+        toggleButton.innerText = 'Switch to °F';
     }
 }
 
@@ -196,7 +188,7 @@ function searchVideos(country, city) {
 
     const searchQuery = city ? `${city}, ${country} ${language} ${category}` : `${country} ${language} ${category}`;
     const cacheKey = generateCacheKey(country, city, language, category);
-
+    
     const cachedData = localStorage.getItem(cacheKey);
     if (cachedData) {
         const { videos, timestamp } = JSON.parse(cachedData);
@@ -214,12 +206,18 @@ function searchVideos(country, city) {
     }
 
     const videoContainer = document.getElementById('video-container');
+    if (!videoContainer) {
+        console.error('Video container not found');
+        return;
+    }
     videoContainer.innerHTML = '';
 
     const loadingOverlay = document.getElementById('loading');
-    setTimeout(() => {
-        loadingOverlay.classList.remove('hidden');
-    }, 100);
+    if (loadingOverlay) {
+        setTimeout(() => loadingOverlay.classList.remove('hidden'), 100);
+    } else {
+        console.error('Loading overlay not found');
+    }
 
     debounce(() => {
         fetch('/search', {
@@ -227,41 +225,38 @@ function searchVideos(country, city) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ country, language, category, city }),
         })
-        .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        })
-        .then(data => {
-            loadingOverlay.classList.add('hidden');
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                if (loadingOverlay) {
+                    loadingOverlay.classList.add('hidden');
+                }
 
-            if (data.error) {
-                console.error('Error from server:', data.error);
-                alert(`Error: ${data.error}`);
-            } else {
-                localStorage.setItem(cacheKey, JSON.stringify({
-                    videos: data.videos,
-                    timestamp: Date.now(),
-                }));
-                displayVideos(data.videos);
-            }
-        })
-        .catch(error => {
-            loadingOverlay.classList.add('hidden');
-            console.error('Error fetching videos:', error);
-            alert('Error fetching videos');
-        });
+                if (data.error) {
+                    console.error('Error from server:', data.error);
+                    alert(`Error: ${data.error}`);
+                } else {
+                    localStorage.setItem(cacheKey, JSON.stringify({
+                        videos: data.videos,
+                        timestamp: Date.now(),
+                    }));
+                    displayVideos(data.videos);
+                }
+            })
+            .catch(error => {
+                if (loadingOverlay) {
+                    loadingOverlay.classList.add('hidden');
+                }
+                console.error('Error fetching videos:', error);
+                alert('Error fetching videos');
+            });
     }, 500);
 }
-
 function displayVideos(videos) {
     console.log('Displaying videos:', videos);
     const videoContainer = document.getElementById('video-container');
-
-    if (!videoContainer) {
-        console.error('Video container not found');
-        return;
-    }
-
     videoContainer.innerHTML = '';
 
     if (videos.youtube && videos.youtube.length > 0) {
@@ -275,7 +270,7 @@ function displayVideos(videos) {
 
             videoElement.addEventListener('click', () => {
                 console.log(`Opening video: ${video.url}`);
-                window.open(`${video.url}`, '_blank');
+                window.open(video.url, '_blank');
             });
 
             videoContainer.appendChild(videoElement);
@@ -291,14 +286,33 @@ function fetchWikiSummary(title) {
     fetch(`/wiki-summary/${encodedTitle}`)
         .then(response => response.json())
         .then(data => {
-            if (data.summary) {
-                document.getElementById('wiki-summary').innerHTML = data.summary;
-            } else {
-                document.getElementById('wiki-summary').innerHTML = 'Summary not available.';
-            }
+            document.getElementById('wiki-summary').innerHTML = data.summary || 'Summary not available.';
         })
         .catch(error => {
             console.error('Error fetching Wikipedia data:', error);
             document.getElementById('wiki-summary').innerHTML = 'Failed to fetch data.';
         });
 }
+
+// Enhance country hover effect
+function updateCountryStyle(layer, isHover) {
+    layer.setStyle({
+        fillColor: isHover ? '#6C5CE7' : '#3388ff',
+        fillOpacity: isHover ? 0.5 : 0.3,
+        weight: isHover ? 2 : 1,
+        color: isHover ? '#6C5CE7' : 'white'
+    });
+}
+
+// Add event listeners for UI enhancements
+document.addEventListener('DOMContentLoaded', () => {
+    const selects = document.querySelectorAll('.custom-select');
+    selects.forEach(select => {
+        select.addEventListener('mouseover', () => {
+            select.style.transform = 'translateY(-2px)';
+        });
+        select.addEventListener('mouseout', () => {
+            select.style.transform = 'translateY(0)';
+        });
+    });
+});
