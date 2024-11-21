@@ -61,13 +61,20 @@ fetch('/static/cities_config.json')
     })
     .catch(error => console.error('Error loading cities configuration:', error));
 
-function handleCountryClick(feature) {
-    console.log(`Country selected: ${feature.properties.ADMIN}`);
-    selectedCountry = feature.properties.ADMIN;
-    selectedCity = null;
-    fetchMajorCities(selectedCountry);
-    fetchWikiSummary(selectedCountry);
-}
+    function handleCountryClick(feature) {
+        console.log(`Country selected: ${feature.properties.ADMIN}`);
+        selectedCountry = feature.properties.ADMIN;
+        selectedCity = null;
+        
+        // New lines to zoom to the country
+        const countryBounds = L.geoJSON(feature).getBounds();
+        map.fitBounds(countryBounds, { padding: [50, 50] }); // Optional padding
+        
+        fetchMajorCities(selectedCountry);
+        fetchWikiSummary(selectedCountry);
+        document.querySelector('.video-section').scrollIntoView({ behavior: 'smooth' });
+
+    }
 
 function fetchMajorCities(country) {
     console.log(`Fetching major cities for: ${country}`);
@@ -75,7 +82,7 @@ function fetchMajorCities(country) {
     cityMarkers = [];
 
     const icon = L.icon({
-        iconUrl: 'static/Angle Up_3.png',
+        iconUrl: 'static/angle.png',
         iconSize: [32, 32],
         iconAnchor: [16, 32],
         popupAnchor: [0, -32]
@@ -113,6 +120,9 @@ function handleCityClick(city) {
     searchVideos(selectedCountry, selectedCity);
     fetchWeather(city.coords, city.name);
     fetchWikiSummary(selectedCity);
+    
+    // New line to scroll to videos
+    document.querySelector('.video-section').scrollIntoView({ behavior: 'smooth' });
 }
 
 function fetchWeather(coords, cityName) {
@@ -237,7 +247,8 @@ function searchVideos(country, city) {
                 if (data.error) {
                     console.error('Error from server:', data.error);
                     alert(`Error: ${data.error}`);
-                } else {
+                }
+                {
                     localStorage.setItem(cacheKey, JSON.stringify({
                         videos: data.videos,
                         timestamp: Date.now(),
@@ -254,6 +265,7 @@ function searchVideos(country, city) {
             });
     }, 500);
 }
+
 function displayVideos(videos) {
     console.log('Displaying videos:', videos);
     const videoContainer = document.getElementById('video-container');
@@ -269,13 +281,27 @@ function displayVideos(videos) {
 
             videoElement.addEventListener('click', () => {
                 console.log(`Opening video: ${video.url}`);
-                window.open(video.url, '_blank');
+                window.open(video.url, '_blank'); // Test Mode
+                // window.open(`https://www.youtube.com/watch?v=${video.videoId}`, '_blank'); // Prod Mode
+
             });
 
             videoContainer.appendChild(videoElement);
         });
     } else {
         videoContainer.innerHTML = '<p>No videos found.</p>';
+    }
+}
+
+// Function to hide the info-panel if it's empty
+function toggleInfoPanel() {
+    const infoPanel = document.querySelector('.info-panel');
+    const wikiSummary = document.querySelector('#wiki-summary');
+
+    if (wikiSummary && wikiSummary.innerHTML.trim() === '') {
+        infoPanel.style.display = 'none'; // Hide the info-panel
+    } else {
+        infoPanel.style.display = 'block'; // Show the info-panel if it has content
     }
 }
 
@@ -286,11 +312,14 @@ function fetchWikiSummary(title) {
         .then(response => response.json())
         .then(data => {
             document.getElementById('wiki-summary').innerHTML = data.summary || 'Summary not available.';
+            toggleInfoPanel();
         })
         .catch(error => {
             console.error('Error fetching Wikipedia data:', error);
             document.getElementById('wiki-summary').innerHTML = 'Failed to fetch data.';
         });
+
+
 }
 
 // Enhance country hover effect
@@ -318,3 +347,20 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('resize', function() {
     myMap.invalidateSize(); // Replace `myMap` with your map variable
 });
+
+document.getElementById('language').addEventListener('change', () => {
+    if (selectedCountry) {
+        searchVideos(selectedCountry, selectedCity);
+    }
+});
+
+document.getElementById('category').addEventListener('change', () => {
+    if (selectedCountry) {
+        searchVideos(selectedCountry, selectedCity);
+    }
+});
+
+
+// Call the function on page load
+document.addEventListener('DOMContentLoaded', toggleInfoPanel);
+ 

@@ -2,8 +2,8 @@ from flask import Flask, render_template, jsonify, request, abort
 import os
 import logging
 from dotenv import load_dotenv
-from video_api_manager_bs import VideoAPIManager  # Import the new module
-# from video_api_manager_API import VideoAPIManager  # Import the new module
+from video_api_manager_bs import VideoAPIManager  # Import the new module #Test Mode
+# from video_api_manager_API import VideoAPIManager  # Import the new module #Prod Mode
 from io import BytesIO
 from datetime import datetime
 import qrcode
